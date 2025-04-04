@@ -8,15 +8,29 @@ import {
 import {IconLeftArrow} from '../assets/icons';
 import {imgBackgroundColor} from '../assets/imgs';
 import {getStatusFlight} from '../helpers/TypeFlight/TypeFlight';
+import {CartDetailFlight} from '../components/cartDetailFlight/cartDetailFlight';
 
+interface DepartureItem {
+  title: string;
+  data: string;
+}
 export function DetailsFlight() {
+  const departure: DepartureItem[] = [
+    {title: 'Terminal', data: '2'},
+    {title: 'Gate', data: '62'},
+    {title: 'Boarding', data: '06:00'},
+  ];
+  const arrive: DepartureItem[] = [
+    {title: 'Terminal', data: '4'},
+    {title: 'Est. Landing', data: '09:21'},
+  ];
   const status = 'In the air';
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,}}>
       <FlexView>
         <Image
           source={imgBackgroundColor}
-          style={{width: '100%', height: 450}}
+          style={{width: '100%', height: 400}}
         />
         <CustomButtonRadius>
           <Image
@@ -102,7 +116,12 @@ export function DetailsFlight() {
             }}></View>
         </FlexView>
         <View
-          style={{marginTop: 25,marginBottom:25, borderBottomWidth: 1, borderColor: '#E9E9E9'}}>
+          style={{
+            marginTop: 25,
+            marginBottom: 25,
+            borderBottomWidth: 1,
+            borderColor: '#E9E9E9',
+          }}>
           <FlexView
             direction="row"
             justifyContent="space-between"
@@ -156,9 +175,25 @@ export function DetailsFlight() {
             </View>
           </FlexView>
         </View>
-        <CustomText fontSize="14px" fontWeight="400" lineHeight="22px">
-                          MEX
+
+        <CustomText
+          marginBottom="15px"
+          fontSize="18px"
+          fontWeight="600"
+          lineHeight="24px">
+          Flight details
         </CustomText>
+        <CartDetailFlight
+          title={'Departure'}
+          subTitle={'Ciudad de México - AICM'}
+          data={departure}
+        />
+        <CartDetailFlight
+          icon="Arrival"
+          title={'Arrival'}
+          subTitle={'Cancún  - Terminal 4'}
+          data={arrive}
+        />
       </ContainerDetail>
     </View>
   );

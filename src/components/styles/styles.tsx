@@ -119,6 +119,7 @@ export const FlexView = styled.View<{
   padding?: string;
   margin?: string;
   marginBottom?: string;
+  marginRigth?: string;
   backgroundColor?: string;
   width?: string;
   height?: string;
@@ -137,7 +138,8 @@ export const FlexView = styled.View<{
   flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
   padding: ${({ padding = '0' }) => padding};
   margin: ${({ margin = '0' }) => margin};
-  margin-bottom: ${({ marginBottom = '0' }) => marginBottom}; ;
+  margin-right:${({ marginRigth = '0' }) => marginRigth}; ;
+  margin-bottom: ${({ marginBottom = '0' }) => marginBottom}; 
   background-color: ${({ backgroundColor = 'transparent' }) => backgroundColor};
   width: ${({ width = 'auto' }) => width};
   border-radius: ${({ borderRadius = '0' }) => borderRadius};
@@ -217,11 +219,10 @@ export const CustomButtonRadius = styled.TouchableOpacity<{
 
 export const ContainerDetail = styled.View`
   background-color: white;
-  flex: 1;
   display: flex;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   padding-left: 25px;
   padding-right: 25px;
-  top: -140px;
+  height: 550px;
 `;
