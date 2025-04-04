@@ -8,7 +8,7 @@ import {
 import {IconLeftArrow} from '../assets/icons';
 import {imgBackgroundColor} from '../assets/imgs';
 import {getStatusFlight} from '../helpers/TypeFlight/TypeFlight';
-import {CartDetailFlight} from '../components/cartDetailFlight/cartDetailFlight';
+import {CartDetailFlight} from '../components/cartDetailFlight/CartDetailFlight';
 
 interface DepartureItem {
   title: string;

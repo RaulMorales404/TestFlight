@@ -13,12 +13,8 @@ function App(): React.JSX.Element {
 
   return (
    
-     <DetailsFlight></DetailsFlight>
+     <SearchFlight></SearchFlight>
  
-    
-    
-    
-    
   );
 }
 

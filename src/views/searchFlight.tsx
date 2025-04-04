@@ -1,75 +1,89 @@
-import React, { useState } from "react";
-import { 
-
-  Container, DateInput, DateText,  FooterText,  InputWrapper, 
-   LinkText, 
-   SearchButton, SearchButtonText,  StyledInput, Subtitle, TabButton, Tabs, TabText, TimeText, Title 
-} from "../components/styles/styles";
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-
+import React, {useState} from 'react';
+import {
+  Container,
+  CustomText,
+  FlexView,
+  SearchButton,
+  SearchButtonText,
+  StyledInput,
+  TabButton,
+  Tabs,
+  TabText,
+} from '../components/styles/styles';
+import {View} from 'react-native';
+import {TypeFlightSearchNumber} from '../components/typeFlightSearch/TypeFlightSearchNumber';
+import {TypeFlightSearchDestination} from '../components/typeFlightSearch/TypeFlightSearchDestination';
+import {Foother} from '../components/footer/Foother';
 
 export const SearchFlight = () => {
-  
-  const [activeTab, setActiveTab] = useState<'flight' | 'destination'>('flight');
-  const [flightNumber, setFlightNumber] = useState<string>('');
-  const [date, setDate] = useState<Date>(new Date());
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-
-
-  const handleDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    setShowDatePicker(false);
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-  };
+  const [activeTab, setActiveTab] = useState<'flight' | 'destination'>(
+    'flight',
+  );
 
   return (
-    <Container>
-      <Title>Track your flight</Title>
-      <Subtitle>Keep you informed in real time!</Subtitle>
+    <View style={{flex: 1}}>
+      <FlexView
+        height="200px"
+        width="100%"
+        justifyContent="center"
+        backgroundColor="#F7F7F7"
+        alignItems="center">
+        <CustomText
+          fontSize="26px"
+          fontWeight="700"
+          textAlign="right"
+          lineHeight="32px">
+          Track your flight
+        </CustomText>
+        <CustomText
+          fontSize="16px"
+          fontWeight="400"
+          textAlign="right"
+          color="#000000"
+          lineHeight="22px">
+          Keep you informed in real time!
+        </CustomText>
+      </FlexView>
+      <Container>
+        <FlexView width="280px" alignSelf="center" marginBottom="25px">
+          <Tabs>
+            <TabButton
+              active={activeTab === 'flight'}
+              onPress={() => setActiveTab('flight')}>
+              <TabText active={activeTab === 'flight'}>Flight Number</TabText>
+            </TabButton>
+            <TabButton
+              active={activeTab === 'destination'}
+              onPress={() => setActiveTab('destination')}>
+              <TabText active={activeTab === 'destination'}>
+                Destination
+              </TabText>
+            </TabButton>
+          </Tabs>
+        </FlexView>
 
-      <Tabs>
-        <TabButton active={activeTab === 'flight'} onPress={() => setActiveTab('flight')}>
-          <TabText active={activeTab === 'flight'}>Flight Number</TabText>
-        </TabButton>
-        <TabButton active={activeTab === 'destination'} onPress={() => setActiveTab('destination')}>
-          <TabText active={activeTab === 'destination'}>Destination</TabText>
-        </TabButton>
-      </Tabs>
-
-      <InputWrapper>
-        <StyledInput
-          placeholder="Flight number"
-          value={flightNumber}
-          onChangeText={setFlightNumber}
-        />
-        <DateInput onPress={() => setShowDatePicker(true)}>
-          <DateText>
-            {date.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })}
-          </DateText>
-        </DateInput>
-      </InputWrapper>
-
-      {showDatePicker && (
-        <DateTimePicker
-          value={date}
-          mode="date"
-          display="default"
-          onChange={handleDateChange}
-        />
-      )}
-       <SearchButton>
+        {activeTab === 'destination' ? (
+          <TypeFlightSearchDestination />
+        ) : (
+          <TypeFlightSearchNumber />
+        )}
+        <SearchButton>
           <SearchButtonText>Search Flight</SearchButtonText>
         </SearchButton>
 
-        <FooterText>
-        Can’t find your flight number?{' '}
-        <LinkText>Try searching by destination</LinkText>
-      </FooterText>
-
-
-
-
-    </Container>
+        {activeTab === 'destination' ? (
+          <Foother
+            text={'Looking for a specific flight? Try searching by'}
+            textLink={'flight number'}
+            w="220px"
+          />
+        ) : (
+          <Foother
+            text={'Can’t find your flight number? Try searching by'}
+            textLink={'destination'}
+          />
+        )}
+      </Container>
+    </View>
   );
 };
