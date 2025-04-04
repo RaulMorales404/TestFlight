@@ -1,41 +1,82 @@
-import {Text, View} from 'react-native';
+import React, {useState} from 'react';
+
+import {ActivityIndicator, Animated, Image, Text, TouchableOpacity, View} from 'react-native';
 import {
   Container,
-  ContainerCard,
   CustomText,
   FlexView,
-  RouteInfo,
-  RouteText,
-  Subtitle,
   Title,
 } from '../components/styles/styles';
+import {CartFlight} from '../components/cartFlight/CartFlight';
+import { IconArrow, IconCalendar, IconLeftArrow, IconRigthArrow } from '../assets/icons';
 
 export const ResultFlight = () => {
+  const [isNumberFlight, setIsNumberFlight] = useState<boolean>(false);
+
   return (
-    <Container>
-      <FlexView direction="row" justifyContent="space-between">
+    <View
+      style={{
+        justifyContent: 'flex-start',
+        flex: 1,
+        top: 57,
+        marginHorizontal: 25,
+      }}>
+      <FlexView
+        direction="row"
+        justifyContent="space-between"
+        marginBottom="25px">
         <View>
-          <Title>A</Title>
+          <TouchableOpacity>
+            <Image source={IconLeftArrow} style={{width: 31, height: 31 }} />
+            </TouchableOpacity>
         </View>
         <View>
-          <CustomText
-            fontSize="32px"
-            fontWeight="700"
-            textAlign="right"
-            lineHeight="32px">
-            AM 500
-          </CustomText>
+          <View >
+            {isNumberFlight ? (
+              <CustomText
+                fontSize="32px"
+                fontWeight="700"
+                textAlign="right"
+                lineHeight="32px">
+                AM 500
+              </CustomText>
+            ) : (
+              <FlexView direction="row" justifyContent="flex-end" >
+                <CustomText
+                  fontSize="32px"
+                  fontWeight="700"
+                  textAlign="right"
+                  lineHeight="32px">
+                  MEX
+                </CustomText>
+                <Image source={IconArrow} style={{width: 20, height: 20,top:4,left:-2 }} />
+                 <CustomText
+                  fontSize="32px"
+                  fontWeight="700"
+                  textAlign="right"
+                  lineHeight="32px">
+                  CUN
+                </CustomText>
+              </FlexView>
+            )}
+          </View>
+
           <CustomText
             fontSize="16px"
             fontWeight="400"
             textAlign="right"
             lineHeight="20px">
-            Tuesday, Nov 21 | H Change
+            Tuesday, Nov 21 | <Image source={IconCalendar} style={{width: 14, height: 14 }} />{' '}
+                
+            <Text style={{textDecorationLine: 'underline'}}>Change</Text>
           </CustomText>
         </View>
       </FlexView>
 
-      <FlexView direction="row" justifyContent="space-between">
+      <FlexView
+        direction="row"
+        justifyContent="space-between"
+        marginBottom="18px">
         <View>
           <CustomText fontSize="14px" fontWeight="600" lineHeight="20px">
             Mexico City to Cancún
@@ -51,74 +92,24 @@ export const ResultFlight = () => {
           </CustomText>
         </View>
       </FlexView>
-      <ContainerCard>
-        <FlexView
-            width="80px"
-            height="28px"
-            backgroundColor='black'
-            justifyContent='center'
-            alignItems='center'
-            borderBottomEndRadius= "18px"
-            borderTopLeftRadius= "20px" >
-          <CustomText fontSize="11px"fontWeight="600"lineHeight="20px"color="white">
-            Arrived
-          </CustomText>
-        </FlexView>
+      <View></View>
 
-        <View style={{flex: 3, justifyContent: 'center'}}>
-          <FlexView direction="row" justifyContent="space-between" padding="0px 15px">
-            <View>
-              <CustomText fontSize="22px" fontWeight="600" lineHeight="22px">
-                AM 500
-              </CustomText>
-            </View>
-            <View>
-              <Text>-------------------</Text>
-            </View>
-            <View>
-              <CustomText fontSize="22px" fontWeight="600" lineHeight="22px">
-                AM 500
-              </CustomText>
-            </View>
-          </FlexView>
-
-          <FlexView direction="row" justifyContent="space-between" padding="0px 15px">
-            <View>
-              <CustomText fontSize="14px" fontWeight="400" lineHeight="22px">
-                MEX
-              </CustomText>
-            </View>
-            <View>
-              <CustomText fontSize="10px"fontWeight="600"lineHeight="22px"color="#00000066">
-                2h 28m
-              </CustomText>
-            </View>
-            <View>
-              <CustomText fontSize="14px" fontWeight="400" lineHeight="22px">
-                CUN
-              </CustomText>
-            </View>
-          </FlexView>
-        </View>
-
-        <RouteInfo>
-          <FlexView
-            direction="row"justifyContent="space-between"padding="0px 15px" >
-            <View>
-              <CustomText fontSize="12px" fontWeight="600" lineHeight="20px" >
-                AM 500
-              </CustomText>
-            </View>
-            <View>
-              <CustomText fontSize="12px"fontWeight="400" marginTop="-1px"
-                color="#00000080"
-                lineHeight="25px">
-                Details
-              </CustomText>
-            </View>
-          </FlexView>
-        </RouteInfo>
-      </ContainerCard>
-    </Container>
+      <Animated.FlatList
+        data={[1, 2, 3, 4, 5, 6]}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={<View style={{paddingBottom: 0}} />}
+        renderItem={() => <CartFlight></CartFlight>}
+        style={{backgroundColor: 'white'}}
+        ListFooterComponent={
+          <View style={{height: 150, justifyContent: 'center'}}>
+            {/* <ActivityIndicator color={'#2CB3FC'} size={50} /> */}
+          </View>
+        }
+        renderToHardwareTextureAndroid
+        keyExtractor={(item, index) => index.toString()}
+        scrollEventThrottle={30}
+        onEndReachedThreshold={0.7}
+      />
+    </View>
   );
 };

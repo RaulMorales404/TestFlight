@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { 
-  CardContainer,
-  Container, DateInput, DateText, DurationText, FlightHeader, FlightNumber, FlightTimes, FooterText, InputWrapper, 
-  LinkText, RouteInfo, RouteText, SearchButton, SearchButtonText, StatusText, StyledInput, Subtitle, TabButton, Tabs, TabText, TimeText, Title 
+
+  Container, DateInput, DateText,  FooterText,  InputWrapper, 
+   LinkText, 
+   SearchButton, SearchButtonText,  StyledInput, Subtitle, TabButton, Tabs, TabText, TimeText, Title 
 } from "../components/styles/styles";
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { Text, View } from "react-native";
+
 
 export const SearchFlight = () => {
   
@@ -60,6 +61,11 @@ export const SearchFlight = () => {
        <SearchButton>
           <SearchButtonText>Search Flight</SearchButtonText>
         </SearchButton>
+
+        <FooterText>
+        Can’t find your flight number?{' '}
+        <LinkText>Try searching by destination</LinkText>
+      </FooterText>
 
 
 

@@ -1,12 +1,27 @@
 import styled from "styled-components";
-import { Text,View,Pressable,TextInput} from "react-native";
+import { Text,View,Pressable,TextInput,TouchableOpacity} from "react-native";
 
-export const Container = styled.View`
-  flex: 1;
-  padding: 24px;
-  justify-content: center;
-  background-color: white;
+export const Container = styled.View<{
+  direction?: 'row' | 'column'; 
+  justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly'; 
+  alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
+  alignSelf?: 'auto' | 'flex-start' | 'center' | 'flex-end' | 'stretch'; 
+  backgroundColor?: string;
+  width?: string;
+  height?: string;
+  flex:number;
+  marginTop:string;
+}>`
+  flex:  ${({ flex = 1 }) => flex};
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-top:  ${({ marginTop ='0' }) => marginTop};
 `;
+
+
+
+
+
 
 export const Title = styled.Text`
   font-size: 24px;
@@ -92,9 +107,10 @@ export const LinkText = styled.Text`
 
 
 
+
 export const FlexView = styled.View<{
   direction?: 'row' | 'column'; 
-  justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly'; 
+  justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'flex-end'|'space-evenly'; 
   alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
   alignSelf?: 'auto' | 'flex-start' | 'center' | 'flex-end' | 'stretch'; 
   grow?: number;
@@ -102,6 +118,7 @@ export const FlexView = styled.View<{
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   padding?: string;
   margin?: string;
+  marginBottom?: string;
   backgroundColor?: string;
   width?: string;
   height?: string;
@@ -120,6 +137,7 @@ export const FlexView = styled.View<{
   flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
   padding: ${({ padding = '0' }) => padding};
   margin: ${({ margin = '0' }) => margin};
+  margin-bottom: ${({ marginBottom = '0' }) => marginBottom}; ;
   background-color: ${({ backgroundColor = 'transparent' }) => backgroundColor};
   width: ${({ width = 'auto' }) => width};
   border-radius: ${({ borderRadius = '0' }) => borderRadius};
@@ -131,11 +149,12 @@ export const FlexView = styled.View<{
 `;
 
 export const ContainerCard = styled.View`
- width: 360px;
+ width: 100%;
 border-width: 1.5px;
 border-color:"#000";
 height:121px;
-border-radius: 20px;
+border-radius: 18px;
+margin-bottom: 18px;
 `;
 
 export const CustomText = styled.Text<{
@@ -149,6 +168,7 @@ export const CustomText = styled.Text<{
   marginRight?: string;
   padding?: string;
   lineHeight?: string;
+  textDecorationLine?:string;
   letterSpacing?: string;
   textTransform?: 'uppercase' | 'lowercase' | 'capitalize';
 }>`
@@ -161,68 +181,47 @@ export const CustomText = styled.Text<{
   margin-left: ${({ marginLeft = '0' }) => marginLeft};
   margin-right: ${({ marginRight = '0' }) => marginRight};
   padding: ${({ padding = '0' }) => padding};
+  text-decoration-line:${({ textDecorationLine = '' }) => textDecorationLine};
   line-height: ${({ lineHeight = '20px' }) => lineHeight};
   letter-spacing: ${({ letterSpacing = '0' }) => letterSpacing};
   text-transform: ${({ textTransform = 'none' }) => textTransform};
 `;
 
 
-
-
-
-export const CardContainer = styled.View`
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 10px;
-`;
-
-// Flight header section with departure, arrival, and status
-export const FlightHeader = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-export const StatusText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: green;
-`;
-
-export const FlightNumber = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-`;
-
-export const FlightTimes = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 4px;
-`;
-
-export const TimeText = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-`;
-
-export const DurationText = styled.Text`
-  font-size: 14px;
-  color: #666;
-  margin-top: 4px;
-`;
-
-// Flight route details
 export const RouteInfo = styled.View`
   border-top-width: 1px;
   border-top-color: #ccc;
  
 `;
 
-export const RouteText = styled.Text`
-  font-size: 14px;
-  color: #333;
+
+
+export const CustomButtonRadius = styled.TouchableOpacity<{
+  backgroundColor?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  top?: string;
+  left?: string;
+}>`
+  background-color: ${({ backgroundColor = 'white' }) => backgroundColor};
+  width: ${({ width = '40px' }) => width};
+  height: ${({ height = '40px' }) => height};
+  border-radius: ${({ borderRadius = '100px' }) => borderRadius};
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: ${({ top = '80px' }) => top};
+  left: ${({ left = '25px' }) => left};
+`;
+
+export const ContainerDetail = styled.View`
+  background-color: white;
+  flex: 1;
+  display: flex;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+  top: -140px;
 `;
